@@ -19,43 +19,53 @@ public abstract class Person implements java.io.Serializable {
 	private String address;
 	private String PhoneNbr;
 	private String email_address;
-
+	public int age;
+	
 	public String getFirstName() {
 		return FirstName;
 	}
 
-	public void setFirstName(String FirstName) {
-		this.FirstName = FirstName;
+	public Person setFirstName(String FirstName) {
+		FirstName = FirstName;
+		return this;
 	}
 
 	public String getMiddleName() {
 		return MiddleName;
 	}
 
-	public void setMiddleName(String MiddleName) {
-		this.MiddleName = MiddleName;
+	public Person setMiddleName(String MiddleName) {
+		MiddleName = MiddleName;
+		return this;
 	}
 
 	public String getLastName() {
 		return LastName;
 	}
 
-	public void setLastName(String LastName) {
-		this.LastName = LastName;
+	public Person setLastName(String LastName) {
+		LastName = LastName;
+		return this;
 	}
 
 	public Date getDOB() {
 		return DOB;
 	}
 
-	public void setDOB(Date DOB){
-		this.DOB = DOB;
-		
-		
+	@SuppressWarnings("deprecation")
+	public Date setDOB(Date DOB) throws PersonException {
+		Date today = new Date();
+		if ((today.getYear() - DOB.getYear()) > 100) {
+			throw new PersonException("Please make sure you entered your date of birth correctly,"
+					+ " or ask yourself why you are trying to work past the age of 100.");
+		}else {
+			return this.DOB = DOB;
+		}
 	}
 
-	public void setAddress(String newAddress) {
+	public Person setAddress(String newAddress) {
 		address = newAddress;
+		return this;
 	}
 
 	public String getAddress() {
@@ -74,7 +84,7 @@ public abstract class Person implements java.io.Serializable {
 		return this;
 	}
 	
-	public String getPhone() {
+	public String getPhoneNbr() {
 		return PhoneNbr;
 	}
 
@@ -119,7 +129,7 @@ public abstract class Person implements java.io.Serializable {
 		System.out.println(this.DOB);
 	}
 
-	public int PrintAge() {
+	public int PrintAge() throws PersonException {
 		Calendar today = Calendar.getInstance();
 		Calendar birthDate = Calendar.getInstance();
 
@@ -143,6 +153,10 @@ public abstract class Person implements java.io.Serializable {
 				&& (birthDate.get(Calendar.DAY_OF_MONTH) > today
 						.get(Calendar.DAY_OF_MONTH))) {
 			age--;
+			if (age > 100) {
+				throw new PersonException("Please make sure you entered your date of birth correctly,"
+					+ " or ask yourself why you are trying to work past the age of 100.");
+			}
 		}
 
 		System.out.println("age is " + age);

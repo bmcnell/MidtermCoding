@@ -8,15 +8,20 @@ import com.cisc181.exception.PersonException;
 public class Staff extends Employee {
 
 	 private eTitle Title;
+	 
+	 public Staff() {
+		 
+	 }
 
-	   public Staff(eTitle title){
+	 public Staff(eTitle title){
 	        this.Title = title;
 	    }
 
-	    public void setTitle(eTitle title){
+	 public void setTitle(eTitle title){
 	        this.Title = title;
 	    }
-	    public eTitle getTitle(){
+	 
+	 public eTitle getTitle(){
 	        return this.Title;
 	    }
 
@@ -33,4 +38,8 @@ public class Staff extends Employee {
 		this.Title = Title;
 	}
 
+	public Staff setOfficeHours(String officeHours) {
+		officeHours = officeHours;
+		return this;
+	}
 }

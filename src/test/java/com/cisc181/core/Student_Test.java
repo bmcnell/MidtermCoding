@@ -2,6 +2,9 @@ package com.cisc181.core;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,7 +22,8 @@ public class Student_Test {
 	static ArrayList<Student> tenStudents = new ArrayList<Student>();
 	
 	@BeforeClass
-	public static void setup() throws PersonException {
+	public static void setup() throws PersonException, ParseException {
+		DateFormat date = new SimpleDateFormat("YYYY-MM-DD");
 		
 		Course biology = new Course("BISC104");
 		Course spanish = new Course("SPAN107");
@@ -28,10 +32,10 @@ public class Student_Test {
 		threeCourses.add(spanish);
 		threeCourses.add(statistics);
 		
-		Semester fall = new Semester();
-		Semester spring = new Semester();
-		twoSemesters.add(fall);
-		twoSemesters.add(spring);
+		Semester fall2016 = new Semester(date.parse("2016-08-30"),date.parse("2016-12-09"));
+		Semester spring2017 = new Semester(date.parse("2017-02-06"),date.parse("2017-05-16"));
+		twoSemesters.add(fall2016);
+		twoSemesters.add(spring2017);
 		
 		// enrolling list of 10 new students, that all live at the white house. 
 		//and were born on January 1, 1985
@@ -72,4 +76,5 @@ public class Student_Test {
 		tenStudents.get(1).setMajor(eMajor.BUSINESS);
 		assertEquals(tenStudents.get(1).getMajor(), eMajor.BUSINESS);
 	}
+	
 }
