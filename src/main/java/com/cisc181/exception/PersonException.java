@@ -17,8 +17,4 @@ public class PersonException extends Exception {
 		super(message);
 	}
 	
-    String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
-    Pattern pattern = Pattern.compile(regex);
-    
-	
 }

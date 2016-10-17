@@ -11,6 +11,9 @@ public class Course {
 	private eMajor Major;
 
 	public Course(String CourseName) {
-		
+	}
+
+	public int getGradePoints() {
+		return this.GradePoints;
 	}
 }

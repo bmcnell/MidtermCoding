@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -50,7 +51,7 @@ public class Staff_Test {
 
 	    Calendar currentDate = Calendar.getInstance();
 	    @SuppressWarnings("deprecation")
-		Calendar DOB = new Calendar.set(85, 12, 3);
+		Calendar DOB = new GregorianCalendar(1985, 12, 3);
 	    int age = currentDate.get(Calendar.YEAR) - ((Calendar) DOB).get(Calendar.YEAR); 
 
 		try{

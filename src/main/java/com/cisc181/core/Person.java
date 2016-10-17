@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.cisc181.exception.PersonException;
+
 /*
  * comment
  */
@@ -15,7 +17,7 @@ public abstract class Person implements java.io.Serializable {
 	private String MiddleName;
 	private String LastName;
 	private String address;
-	private String phone_number;
+	private String PhoneNbr;
 	private String email_address;
 
 	public String getFirstName() {
@@ -60,13 +62,19 @@ public abstract class Person implements java.io.Serializable {
 		return address;
 	}
 
-	public void setPhone(String newPhone_number) {
-		phone_number = newPhone_number;
-	
-	}
+	public Person setPhoneNbr(String PhoneNbr) throws PersonException {
 
+		this.PhoneNbr = PhoneNbr;
+		String regex = "^\\({1}([0-9]{3})\\){1}-{1}([0-9]{3})-{1}([0-9]{4})$";
+		boolean b = Pattern.matches(regex, PhoneNbr);
+		
+		if (!b) {
+			throw new PersonException("Please enter your phone number in the correct format.");
+		} 
+		return this;
+	}
 	public String getPhone() {
-		return phone_number;
+		return PhoneNbr;
 	}
 
 	public void setEmail(String newEmail) {
@@ -89,14 +97,14 @@ public abstract class Person implements java.io.Serializable {
 	 */
 
 	public Person(String FirstName, String MiddleName, String LastName,
-			Date DOB, String Address, String Phone_number, String Email)
+			Date DOB, String Address, String Phone_number, String Email) throws PersonException
 	{
 		this.FirstName = FirstName;
 		this.MiddleName = MiddleName;
 		this.LastName = LastName;
 		this.setDOB(DOB);
 		this.address = Address;
-		this.setPhone(Phone_number);
+		this.setPhoneNbr(PhoneNbr);
 		this.email_address = Email;
 		
 	}
@@ -139,6 +147,6 @@ public abstract class Person implements java.io.Serializable {
 		System.out.println("age is " + age);
 
 		return age;
-
+		
 	}
 }
