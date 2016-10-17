@@ -10,15 +10,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.cisc181.eNums.eMajor;
+import com.cisc181.exception.PersonException;
 
 public class Student_Test {
 
 	static ArrayList<Course> threeCourses = new ArrayList<Course>();
-	static ArrayList<Student> tenStudents = new ArrayList<Student>();
 	static ArrayList<Semester> twoSemesters = new ArrayList<Semester>();
+	static ArrayList<Student> tenStudents = new ArrayList<Student>();
 	
 	@BeforeClass
-	public static void setup() {
+	public static void setup() throws PersonException {
 		
 		Course biology = new Course("BISC104");
 		Course spanish = new Course("SPAN107");
@@ -32,44 +33,43 @@ public class Student_Test {
 		twoSemesters.add(fall);
 		twoSemesters.add(spring);
 		
-		ArrayList<Section> sections = new ArrayList<Section>();
-		int count = 1;
-		for (Semester semester : twoSemesters) {
-			for (Course course : threeCourses) {
-				sections.add(new Section());
-			}
-		}
-		try { 
-			// enrolling list of 10 new students, that all live at the white house. 
-			tenStudents.add(new Student("John", "Robert", "Johnson", Date.valueOf("1985-10-10"), 
+		// enrolling list of 10 new students, that all live at the white house. 
+		//and were born on January 1, 1985
+		@SuppressWarnings("deprecation")
+		Date birthday = new Date(1990, Calendar.JANUARY, 01);
+		tenStudents.add(new Student("John", "Robert", "Johnson", birthday, 
 					eMajor.BUSINESS, "1600 Pennsylvania Ave", "(000) 000-0000", "s0@email.com"));
-			tenStudents.add(new Student("Robert", "John", "Roberts", Date.valueOf("1985-01-01"), 
+		tenStudents.add(new Student("Robert", "John", "Roberts", birthday, 
 					eMajor.COMPSI, "1600 Pennsylvania Ave", "(111) 111-1111", "s1@email.com"));
-			tenStudents.add(new Student("Bonnie", "Ann", "McNellis", Date.valueOf("1985-02-02"), 
+		tenStudents.add(new Student("Bonnie", "Ann", "McNellis", birthday, 
 					eMajor.CHEM, "1600 Pennsylvania Ave", "(222) 222-2222", "s2@email.com"));
-			tenStudents.add(new Student("Gisselle", "Patricia", "Garcia", Date.valueOf("1985-03-03"), 
+		tenStudents.add(new Student("Gisselle", "Patricia", "Garcia", birthday, 
 					eMajor.PHYSICS, "1600 Pennsylvania Ave", "(333) 333-3333", "s3@email.com"));
-			tenStudents.add(new Student("Megan", "Elizabeth", "Tanabe", Date.valueOf("1985-04-04"), 
+		tenStudents.add(new Student("Megan", "Elizabeth", "Tanabe", birthday, 
 					eMajor.NURSING, "1600 Pennsylvania Ave", "(444) 444-4444", "s4@email.com"));
-			tenStudents.add(new Student("Jordan", "Thomas", "Kavanaugh", Date.valueOf("1985-05-05"), 
+		tenStudents.add(new Student("Jordan", "Thomas", "Kavanaugh", birthday, 
 					eMajor.BUSINESS, "1600 Pennsylvania Ave", "(555) 555-5555", "s5@email.com"));
-			tenStudents.add(new Student("Zuzie", "May", "Q", Date.valueOf("1985-06-06"), 
+		tenStudents.add(new Student("Zuzie", "May", "Q", birthday, 
 					eMajor.COMPSI, "1600 Pennsylvania Ave", "(676) 676-6766", "s6@email.com"));
-			tenStudents.add(new Student("James", "Something", "Bond", Date.valueOf("1985-07-07"), 
+		tenStudents.add(new Student("James", "Something", "Bond", birthday, 
 					eMajor.CHEM, "1600 Pennsylvania Ave", "(777) 007-7777", "s7@email.com"));
-			tenStudents.add(new Student("Thomas", "The", "Tank", Date.valueOf("1985-08-08"), 
+		tenStudents.add(new Student("Thomas", "The", "Tank", birthday, 
 					eMajor.PHYSICS, "1600 Pennsylvania Ave", "(888) 888-8888", "s8@email.com"));
-			tenStudents.add(new Student("Hayley", "Marie", "Richards", Date.valueOf("1985-09-09"),
+		tenStudents.add(new Student("Hayley", "Marie", "Richards", birthday,
 					eMajor.NURSING, "1600 Pennsylvania Ave", "(999) 999-9999", "s9@email.com"));
-		} catch (PersonException e) {
-
-		}
 		
 	}
 
 
 	@Test
-	public void test() {
+	public void testTest() {
 		assertEquals(1, 1);
+	}
+	
+	@Test
+	public void testMajor() {
+		assertEquals(tenStudents.get(1).getMajor(), eMajor.COMPSI);
+		tenStudents.get(1).setMajor(eMajor.BUSINESS);
+		assertEquals(tenStudents.get(1).getMajor(), eMajor.BUSINESS);
 	}
 }

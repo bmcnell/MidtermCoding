@@ -2,6 +2,8 @@ package com.cisc181.core;
 
 import static org.junit.Assert.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,7 +29,7 @@ public class Staff_Test {
 	}	
 	
 	@Test
-	public void StaffSalary() {
+	public void StaffSalary() throws PersonException {
 		
 		
 		double salary = 180;
@@ -50,13 +52,12 @@ public class Staff_Test {
 	public void InvalidDOB() throws PersonException, Exception{
 
 	    Calendar currentDate = Calendar.getInstance();
-	    @SuppressWarnings("deprecation")
-		Calendar DOB = new GregorianCalendar(1985, 12, 3);
-	    int age = currentDate.get(Calendar.YEAR) - ((Calendar) DOB).get(Calendar.YEAR); 
+		DateFormat format=new SimpleDateFormat("YYYY-MM-DD");
+		Date DOB=format.parse("1912-12-19");
 
 		try{
 			new Staff("John", "Robert", "Smith",
-					dobOrHire, "1600 Pennsylvania Ave", "(888)-888-8888", "email@email.com",
+					DOB , "1600 Pennsylvania Ave", "(888)-888-8888", "email@email.com",
 					"MWF", 2, 180, dobOrHire, eTitle.MR);
 		} catch (PersonException e) {
 			throw new PersonException("Please make sure you entered your date of birth correctly,"
