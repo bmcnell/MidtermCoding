@@ -28,10 +28,9 @@ public class Staff_Test {
 		assertEquals(1,1);
 	}	
 	
+	//looping through for 5 new staff members, adding their doubling salaries and finding average salary
 	@Test
 	public void StaffSalary() throws PersonException {
-		
-		
 		double salary = 10000;
 		String FirstName = "John ";
 		double total = 0;
@@ -44,9 +43,11 @@ public class Staff_Test {
 			FirstName+="I";
 		}
 		double average = total/5;
-		assertEquals(average, 62000, 0.0);
+		assertEquals(average, 62000.0, 0.01);
 	}
-
+	
+	//test invalid date of birth (older than 100)
+	//success
 	@Test(expected=PersonException.class)
 	public void InvalidDOB() throws PersonException, Exception{
 
@@ -63,6 +64,8 @@ public class Staff_Test {
 		}
 	}
 	
+	//test phone number entry - regex
+	//success
 	@Test(expected = PersonException.class)
 	public void InvalidPhone() throws PersonException{
 		Staff member2 = new Staff();

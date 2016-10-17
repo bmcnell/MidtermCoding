@@ -17,14 +17,17 @@ import com.cisc181.exception.PersonException;
 
 public class Student_Test {
 
+	//creating arraylists that will be added to later
 	static ArrayList<Course> threeCourses = new ArrayList<Course>();
 	static ArrayList<Semester> twoSemesters = new ArrayList<Semester>();
 	static ArrayList<Student> tenStudents = new ArrayList<Student>();
+	static ArrayList<Section> sixSections = new ArrayList<Section>();
 	
 	@BeforeClass
 	public static void setup() throws PersonException, ParseException {
 		DateFormat date = new SimpleDateFormat("YYYY-MM-DD");
 		
+		//create three new courses
 		Course biology = new Course("BISC104");
 		Course spanish = new Course("SPAN107");
 		Course statistics = new Course("STAT200");
@@ -32,13 +35,23 @@ public class Student_Test {
 		threeCourses.add(spanish);
 		threeCourses.add(statistics);
 		
+		//create two new semesters
 		Semester fall2016 = new Semester(date.parse("2016-08-30"),date.parse("2016-12-09"));
 		Semester spring2017 = new Semester(date.parse("2017-02-06"),date.parse("2017-05-16"));
 		twoSemesters.add(fall2016);
 		twoSemesters.add(spring2017);
 		
+		//add two Sections for each Course & Semester (total of six Sections).
+		//add them to an ArrayList of Section
+		int c = 0;
+		for (Course course : threeCourses) {
+			for (Semester semester : twoSemesters) {
+				sixSections.add(new Section(c++, semester, course, course.getGradePoints()));
+			}
+		}
+		
 		// enrolling list of 10 new students, that all live at the white house. 
-		//and were born on January 1, 1985
+		//and were born on January 1, 1990
 		@SuppressWarnings("deprecation")
 		Date birthday = new Date(1990, Calendar.JANUARY, 01);
 		tenStudents.add(new Student("John", "Robert", "Johnson", birthday, 
@@ -64,12 +77,13 @@ public class Student_Test {
 		
 	}
 
-
 	@Test
 	public void testTest() {
 		assertEquals(1, 1);
 	}
 	
+	//change major of one of enrolled students
+	//success
 	@Test
 	public void testMajor() {
 		assertEquals(tenStudents.get(1).getMajor(), eMajor.COMPSI);
