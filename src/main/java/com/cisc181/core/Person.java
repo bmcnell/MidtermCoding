@@ -73,6 +73,7 @@ public abstract class Person implements java.io.Serializable {
 		} 
 		return this;
 	}
+	
 	public String getPhone() {
 		return PhoneNbr;
 	}

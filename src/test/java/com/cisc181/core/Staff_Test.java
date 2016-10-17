@@ -45,7 +45,7 @@ public class Staff_Test {
 			System.out.println(FirstName + ", " + salary);
 		}
 		double average = total/5;
-		assertEquals(0.0, average, 399996);
+		assertEquals(399996, average, 0.0);
 	}
 
 	@Test(expected=PersonException.class)
@@ -57,7 +57,7 @@ public class Staff_Test {
 
 		try{
 			new Staff("John", "Robert", "Smith",
-					DOB , "1600 Pennsylvania Ave", "(888)-888-8888", "email@email.com",
+					DOB , "1600 Pennsylvania Ave", "(888) 888-8888", "email@email.com",
 					"MWF", 2, 180, dobOrHire, eTitle.MR);
 		} catch (PersonException e) {
 			throw new PersonException("Please make sure you entered your date of birth correctly,"
